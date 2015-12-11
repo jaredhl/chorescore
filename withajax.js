@@ -1,4 +1,4 @@
-var baseURL = 'localhost/FinalProject/Restful.php/';
+var baseURL = '/FinalProject/Restful.php/';
 var getallr = baseURL + 'getAllRoommates';
 var getallc = baseURL + 'getAllChores';
 var getcomp = baseURL + 'getListCompleted';
@@ -6,7 +6,8 @@ var addR = baseURL + 'addRoommate/';
 var delR = baseURL + 'deleteRoomate/';
 var addC = baseURL + 'addChore/';
 var delC = baseURL + 'deleteChore/';
-var complete = baseURL + 'performChore/'
+var upC = baseURL + 'updateChore/';
+var upR = baseURL + 'updateRoommate/';
 
 var choreCard = function(name,baseValue,refresh,lastCompleted){
 	this.name = name;
@@ -315,7 +316,8 @@ function updateRoommateDisplay(){
 }
 
 function completeChore(roomieName,choreName){
-	$.ajax(complete+choreName+"/"+roomieName);
+	$.ajax(upC+choreName);
+	
 	var i;
 	var c;
 	var r;
@@ -337,6 +339,7 @@ function completeChore(roomieName,choreName){
 	}
 	r.choresCompleted.push(c.name);
 	r.score = parseInt(r.score) + parseInt(c.finalValue);
+	$.ajax(upR+roomieName + "/"+String(r.score));
 	
 	c.lastCompleted = 0;
 	resetCards();
