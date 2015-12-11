@@ -4,32 +4,12 @@ require_once "bootstrap.php";
 require_once 'Roommate.php';
 require_once 'Chore.php';
 require_once 'Completed.php';
-
-/*$newMember = new Roommate();
-$newMember->setName("Jared");
-$newMember->setScore(0);
-$newMember->setHid(null);
-$entityManager->persist($newMember);
-$entityManager->flush();
-
-
-
-
-
-
-$roommate = $entityManager->find('Roommate', "Jared");
-$roommate->getName();*/
-
-        
-        
-        
-        
         
         
 //$resource_components = explode('/', $_SERVER['PATH_INFO']);
 //$resource_components = array("","getAllRoommates");
-$currentDate = date("Y-m-d");
-$resource_components = array("","getAllChores");
+//$currentDate = date("Y-m-d");
+$resource_components = array("","updateChore","Trash");
 
 
 /*if (count($resource_components) < 2) {
@@ -57,12 +37,13 @@ if($resource_type == "addRoommate") {
 if($resource_type == 'getRoommate') {
     $roommate = $entityManager->getRepository('Roommate')->findOneBy(array('name' => $resource_components[2]));
     header('Content-type: application/json');
-    /*$array[] = array(
-        'rid' => $roommate->getRid(),
-        'name' => $roommate->getName(),
-        'score' => $roommate->getScore()
-    );*/
     print(json_encode($roommate));
+}
+if($resource_type == 'updateRoommate') {
+    $roommate = $entityManager->getRepository('Roommate')->findOneBy(array('name' => $resource_components[2]));
+    $roommate->setScore($resource_components[3]);
+    //$entityManager->persist($newMember);
+    $entityManager->flush();
 }
 if($resource_type == 'deleteRoommate') {
     $roommate = $entityManager->getRepository('Roommate')->findOneBy(array('name' => $resource_components[2]));
@@ -97,6 +78,12 @@ if($resource_type == 'performChore') {
     $completedRid = $roommate->getRid();
     $newCompleted->setRid($completedRid);
     //$datetime = new DateTime::createFromFormat('Y-m-d', $resource_components[4]);
+}
+if($resource_type == 'updateChore') {
+    $chore = $entityManager->getRepository('Chore')->findOneBy(array('cid' => "3"));
+    $date = new DateTime("now");
+    $chore->setLastCompleted($date);
+    $entityManager->flush();
 }
 if($resource_type == 'getAllChores') {
     $chores = $entityManager->getRepository('Chore')->findAll();

@@ -1,4 +1,4 @@
-var baseURL = 'localhost/FinalProject/Restful.php/';
+var baseURL = '/FinalProject/Restful.php/';
 var getallr = baseURL + 'getAllRoommates';
 var getallc = baseURL + 'getAllChores';
 var getcomp = baseURL + 'getListCompleted';
@@ -96,7 +96,7 @@ var choreCallback = function(cdata){
 		var base = cdata[i]['baseValue'];
 		var refresh = cdata[i]['refreshRate'];
 		var last = cdata[i]['lastCompleted'];
-		last = last.substring(8,9);
+		last = last['date'].substring(8,10);
 		last = new Date().getDate() - parseInt(last);
 		if (last < 0) last = 0;
 		c.push(new choreCard(name,base,refresh,last));
