@@ -5,8 +5,6 @@ class Completed {
     /** @Id @Column(type="integer")
     * @GeneratedValue
     */
-    private $completedID;
-    /** @Column(type="integer") */
     private $cid;
     /** @Column(type="integer") */
     private $rid;
@@ -18,24 +16,27 @@ class Completed {
     public function getCid() {
         return $this->cid;
     }
-    public function setCid($cid){
+    /*public function setCid($cid){
         $this->cid = $cid;
+    }*/
+    public function getRid() {
+        return $this->rid;
     }
-    public function getFinalValue() {
-        return $this->finalValue;
-    }
-    public function setFinalValue($finalValue) {
-        $this->finalValue = $finalValue;
+    public function setRid($rid) {
+        $this->rid = $rid;
     }
     public function getDate() {
         return $this->date;
     }
-    public function setDate($date) {
+     public function setDate($date) {
         $this->date = $date;
     }
-    public function finalValue() {
+    public function getFinalValue() {
         return $this->finalValue;
     }
+    /*public function setFinalValue($finalValue) {
+        $this->finalValue = $finalValue;
+    }*/
     public function setFinalValue($finalValue) {
         $this->finalValue = $finalValue;
     }

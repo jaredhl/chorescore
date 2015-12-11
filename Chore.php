@@ -12,7 +12,7 @@ class Chore {
     private $baseValue;
     /** @Column(type="integer") */
     private $refreshRate;
-    /** @Column(type="integer") */
+    /** @Column(type="date") */
     private $lastCompleted;
     
     public function getCid() {
@@ -33,13 +33,13 @@ class Chore {
     public function getRefreshRate() {
         return $this->refreshRate;
     }
-    public function setBaseValue($baseValue) {
-        $this->baseValue = $baseValue;
+    public function setRefreshRate($refreshRate) {
+        $this->refreshRate = $refreshRate;
     }
     public function getLastCompleted() {
         return $this->lastCompleted;
     }
-    public function setBaseValue($lastCompleted) {
+    public function setLastCompleted($lastCompleted) {
         $this->lastCompleted = $lastCompleted;
     }
 }

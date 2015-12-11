@@ -2,6 +2,8 @@
 require_once('model.php');
 require_once "bootstrap.php";
 require_once 'Roommate.php';
+require_once 'Chore.php';
+require_once 'Completed.php';
 
 /*$newMember = new Roommate();
 $newMember->setName("Jared");
@@ -24,9 +26,11 @@ $roommate->getName();*/
         
         
         
-$resource_components = explode('/', $_SERVER['PATH_INFO']);
+//$resource_components = explode('/', $_SERVER['PATH_INFO']);
 //$resource_components = array("","getAllRoommates");
-//$resource_components = array("","getRoommate","Jared");
+$currentDate = date("Y-m-d");
+$resource_components = array("","addChore","Dishes","3", "2", $currentDate);
+
 
 /*if (count($resource_components) < 2) {
   header("HTTP/1.1 400 Bad Request");
@@ -60,6 +64,12 @@ if($resource_type == 'getRoommate') {
     );*/
     print(json_encode($roommate));
 }
+if($resource_type == 'deleteRoommate') {
+    $roommate = $entityManager->getRepository('Roommate')->findOneBy(array('name' => $resource_components[2]));
+    $entityManager->remove($roommate);
+    $entityManager->flush();
+}
+
 if($resource_type == 'getAllRoommates') {
     $roommates = $entityManager->getRepository('Roommate')->findAll();
     $roommateArray;
@@ -69,6 +79,31 @@ if($resource_type == 'getAllRoommates') {
     header('Content-type: application/json');
     print(json_encode($roommateArray));
 }
+if($resource_type == 'addChore') {
+    $newChore = new Chore;
+    $newChore->setName($resource_components[2]);
+    $newChore->setBaseValue($resource_components[3]);
+    $newChore->setRefreshRate($resource_components[4]);
+    $date = new DateTime("now");
+    $newChore->setLastCompleted($date);
+    $entityManager->persist($newChore);
+    $entityManager->flush();
+}
+if($resource_type == 'performChore') { 
+    $newCompleted = new Completed();
+    $chore = $entityManager->getRepository('Chores')->findOneBy(array('name' => $resource_components[2]));
+    $completedValue = $chore->getBaseValue();
+    $roommate = $entityManager->getRepository('Roommate')->findOneBy(array('name' => $resource_components[3]));
+    $completedRid = $roommate->getRid();
+    $newCompleted->setRid($completedRid);
+    //$datetime = new DateTime::createFromFormat('Y-m-d', $resource_components[4]);
+}
+if($resource_type == 'performChore') {
+    $chore = $entityManager->getRepository('Chore')->findOneBy(array('cid' => $resource_components[2]));
+    $chore->setName($resource_components[3]);
+    $chore->setRefreshRate($resource_components[4]);
+    $chore->setLastCompleted($resource_components[5]);
+} 
 /*if (count($resource_components) == 2) {
   $mlist = array();
 
