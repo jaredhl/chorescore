@@ -1,4 +1,4 @@
-var baseURL = 'localhost/FinalProject/Restful.php/';
+var baseURL = '/FinalProject/Restful.php/';
 var getallr = baseURL + 'getAllRoommates';
 var getallc = baseURL + 'getAllChores';
 var getcomp = baseURL + 'getListCompleted/';
@@ -248,9 +248,12 @@ function extractRoommateData(){
 	//make database request for roommates
 	//***
 	$.getJSON(getallr,function(data,status,jqXHR){
+                for (var i = 0; i < data.length; i++){
+                    data[i] = JSON.parse(data[i]);
+                }
 		roommateCallback(data);
-	});
-
+            
+        });
 		//***
 		//make database request for RoommateChores
 		//***

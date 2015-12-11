@@ -24,8 +24,9 @@ $roommate->getName();*/
         
         
         
-//$resource_components = explode('/', $_SERVER['PATH_INFO']);
-$resource_components = array("addRoommate","Jared");
+$resource_components = explode('/', $_SERVER['PATH_INFO']);
+//$resource_components = array("","getAllRoommates");
+//$resource_components = array("","getRoommate","Jared");
 
 /*if (count($resource_components) < 2) {
   header("HTTP/1.1 400 Bad Request");
@@ -50,16 +51,23 @@ if($resource_type == "addRoommate") {
     
 }
 if($resource_type == 'getRoommate') {
-    $roommate = $entityManager->find('Roommate', "Jared");
-    $roommate->getName();
-    $userArray = array('rid' => $roommate->getRid(), 
+    $roommate = $entityManager->getRepository('Roommate')->findOneBy(array('name' => $resource_components[2]));
+    header('Content-type: application/json');
+    /*$array[] = array(
+        'rid' => $roommate->getRid(),
         'name' => $roommate->getName(),
         'score' => $roommate->getScore()
-            
-            );
-    
+    );*/
+    print(json_encode($roommate));
+}
+if($resource_type == 'getAllRoommates') {
+    $roommates = $entityManager->getRepository('Roommate')->findAll();
+    $roommateArray;
+    foreach ($roommates as $roommate) {
+        $roommateArray[] = json_encode($roommate);
+    }
     header('Content-type: application/json');
-    print(json_encode($userArray));
+    print(json_encode($roommateArray));
 }
 /*if (count($resource_components) == 2) {
   $mlist = array();

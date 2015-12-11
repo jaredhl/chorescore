@@ -1,7 +1,7 @@
 <?php
 /** @Entity @Table(name="Roommates")
  */
-class Roommate {
+class Roommate implements JsonSerializable {
     /** @Id @Column(type="integer") 
      *  @GeneratedValue
      */
@@ -25,6 +25,13 @@ class Roommate {
     }
     public function setScore($score) {
         $this->score = $score;
+    }
+    public function jsonSerialize() {
+        return array(
+            'rid' => $this->rid,
+            'name' => $this->name,
+            'score' => $this->score
+        );
     }
 }
 
