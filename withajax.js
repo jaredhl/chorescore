@@ -1,4 +1,4 @@
-var baseURL = '/FinalProject/Restful.php/';
+var baseURL = 'localhost/FinalProject/Restful.php/';
 var getallr = baseURL + 'getAllRoommates';
 var getallc = baseURL + 'getAllChores';
 var getcomp = baseURL + 'getListCompleted/';
@@ -8,12 +8,6 @@ var addC = baseURL + 'addChore/';
 var delC = baseURL + 'deleteChore/';
 var complete = baseURL + 'performChore/'
 
-//fake database values
-/*
-var pseudoChoreDatabase = ["Dishes","Vacuuming","Trash","Sweeping","Recycling","jerkin' it"];
-var pseudoRoommateDatabase = [["Matt",50],["Adam",15],["Jared",-8]];
-var pseudoRoommateChoreDatabase = [["Matt",0],["Matt",0],["Matt",2],["Matt",4],["Adam",1],["Adam",3],["Matt",4],["Jared",5],["Adam",2],["Matt",0]];
-*/
 
 var choreCard = function(name,baseValue,refresh,lastCompleted){
 	this.name = name;
@@ -117,7 +111,12 @@ function extractChoreData(){
 	//make database request for roommates
 	//***
 	$.getJSON(getallc,function(data,status,jqXHR){
+		for (var i = 0; i < data.length; i++){
+			data[i] = JSON.parse(data[i]);
+			
+		}	
 		choreCallback(data);
+		
 	});
 }
 
@@ -248,12 +247,12 @@ function extractRoommateData(){
 	//make database request for roommates
 	//***
 	$.getJSON(getallr,function(data,status,jqXHR){
-                for (var i = 0; i < data.length; i++){
-                    data[i] = JSON.parse(data[i]);
-                }
+		for (var i = 0; i < data.length; i++){
+			data[i] = JSON.parse(data[i]);
+		}
 		roommateCallback(data);
-            
-        });
+	});
+
 		//***
 		//make database request for RoommateChores
 		//***
