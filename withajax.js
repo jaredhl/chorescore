@@ -571,13 +571,14 @@ $(document).ready(function(){
 		//***
 		//display leaderboards
 		//***
+		/*
 		$.getJSON(getcomp,function(data,status,jqXHR){
 			for (var j = 0; j < data.length; data++){
 				data[j] = JSON.parse(data[j]);
 			}
 			statsHandle(data);
 		});
-	
+		*/
 	});
 	
 	secondaryTools.append(statButton);
