@@ -1,13 +1,12 @@
 var baseURL = 'localhost/FinalProject/Restful.php/';
 var getallr = baseURL + 'getAllRoommates';
 var getallc = baseURL + 'getAllChores';
-var getcomp = baseURL + 'getListCompleted/';
+var getcomp = baseURL + 'getListCompleted';
 var addR = baseURL + 'addRoommate/';
 var delR = baseURL + 'deleteRoomate/';
 var addC = baseURL + 'addChore/';
 var delC = baseURL + 'deleteChore/';
 var complete = baseURL + 'performChore/'
-
 
 var choreCard = function(name,baseValue,refresh,lastCompleted){
 	this.name = name;
@@ -367,8 +366,35 @@ function resetCards(){
 
 
 
+function statsHandle(data){
+	var choreCounts = [];
+	var nameCounts = [];
+	for (var i = 0; i < data.length; i++){
+		var d = data[i];
+		if (d['chore'] in choreCounts) choreCounts[d['chore']] +=1;
+		else choreCounts[d['chore']] = 1;
+		
+		if (d['name'] in nameCounts) nameCounts[d['name']] += 1;
+		else nameCounts[d['name']] = 1;
+	}
+	
+	var stats = $("#stats");
+	stats.empty();
+	
+	for (var chore in choreCounts){
+		stats.append("<p>"+String(chore)+" has been performed "+ String(choreCounts[chore]) +" times</p>");
+	}
+	
+	for (var name in nameCounts){
+		stats.append("<p>"+String(name)+" has performed "+ String(nameCounts[name]) +" chores</p>");
+	}
+	$("body").append(stats);
+	
+}
 
 
+
+var displayStats = false;
 var deletingChore = false;
 var deletingRoomie = false;
 var completingChore = false;
@@ -535,17 +561,31 @@ $(document).ready(function(){
 	//add button(s) to secondary toolbar
 	var secondaryTools = $("<div id = 'secondarytools'></div>");
 	
-	var leaderboardButton = $("<button>View previous leaderboards</button>");
-	leaderboardButton.on('click',function(e){
+	var statButton = $("<button>View Chore statistics</button>");
+	statButton.on('click',function(e){
+	
+			
 		//***
 		//display leaderboards
 		//***
+		$.getJSON(getcomp,function(data,status,jqXHR){
+			for (var j = 0; j < data.length; data++){
+				data[j] = JSON.parse(data[j]);
+			}
+			statsHandle(data);
+		});
+	
 	});
 	
-	secondaryTools.append(leaderboardButton);
+	secondaryTools.append(statButton);
 	secondaryTools.append("<br>");
 	
 	$("body").append(secondaryTools);
+	
+	
+	var stats = $("<div id = 'stats'></div>");
+	body.append(stats);
+	
 	//alert("end");
 	
 });
