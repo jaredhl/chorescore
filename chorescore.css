@@ -1,0 +1,73 @@
+body{
+	background-color:#2ab6e5;
+}
+
+
+#chore_list{
+	width : 30%;
+	float:left;
+	text-align:center;
+	font-size:12pt;
+	
+}
+
+#roomie_list{
+	width : 65%;
+	float:right;
+	text-align:center;
+	font-size:20pt;
+}
+
+.rcard {
+	margin-bottom: 10px;
+	padding:10px;
+	border:thin solid black;
+	background-color:#5488E7;
+}
+
+h1,h2,h3,h4{
+	margin:auto;
+	text-align:center;
+}
+
+#secondarytools{
+	clear:both;
+	margin:auto;
+	text-align:center;
+}
+
+.ccard{
+	border:thin solid black;
+	padding:2px 2px;
+	margin-bottom:3px;
+}
+
+.extended{
+	font-size:10pt;
+}
+
+#primarytools{
+	text-align:center;
+	margin-bottom:8px;
+	margin-top:5px;
+}
+
+.highlighted{
+	border-color:white;
+}
+
+.selected{
+	box-shadow: 3px 3px purple;
+}
+
+.premature {
+	background-color:green;
+}
+
+.due {
+	background-color:yellow;
+}
+
+.overdue {
+	background-color:orange;
+}
