@@ -10,8 +10,6 @@ class Roommate {
     private $name;
     /** @Column(type="integer") */
     private $score;
-    /** @Column(type="integer") */
-    private $hid;
     
     public function getRid() {
         return $this->rid;
@@ -28,10 +26,5 @@ class Roommate {
     public function setScore($score) {
         $this->score = $score;
     }
-    public function getHid() {
-        return $this->hid;
-    }
-    public function setHid($hid) {
-        $this->score = $hid;
-    }
 }
+
