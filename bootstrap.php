@@ -6,7 +6,6 @@ require_once "vendor/autoload.php";
 
 // Create a simple "default" Doctrine ORM configuration for Annotations
 $isDevMode = true;
-$path = array("/path/to/entity-files");
 
 $connectionParams = array(
     'dbname' => 'jlaynedb',
@@ -15,7 +14,7 @@ $connectionParams = array(
     'host' => 'classroom.cs.unc.edu',
     'driver' => 'pdo_mysql',
 );
-$config = Setup::createAnnotationMetadataConfiguration($path, $isDevMode);
+$config = Setup::createAnnotationMetadataConfiguration(array(__DIR__), $isDevMode);
         /*\Doctrine\DBAL\Configuration();*/
 //$conn = \Doctrine\DBAL\DriverManager::getConnection($connectionParams, $config);
 
