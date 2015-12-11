@@ -1,5 +1,5 @@
 <?php
-/** @Entity @Table(name="roommates")
+/** @Entity @Table(name="Roommates")
  */
 class Roommate {
     /** @Id @Column(type="integer") 

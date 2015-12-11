@@ -1,5 +1,5 @@
 <?php
-/** @Entity @Table(name="completed")
+/** @Entity @Table(name="Completed")
  */
 class Completed {
     /** @Id @Column(type="integer")
