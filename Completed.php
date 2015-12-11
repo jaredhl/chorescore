@@ -5,7 +5,7 @@ class Completed {
     /** @Id @Column(type="integer")
     * @GeneratedValue
     */
-    private $completedID
+    private $completedID;
     /** @Column(type="integer") */
     private $cid;
     /** @Column(type="integer") */
