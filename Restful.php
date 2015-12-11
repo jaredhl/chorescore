@@ -29,7 +29,7 @@ $roommate->getName();*/
 //$resource_components = explode('/', $_SERVER['PATH_INFO']);
 //$resource_components = array("","getAllRoommates");
 $currentDate = date("Y-m-d");
-$resource_components = array("","addChore","Dishes","3", "2", $currentDate);
+$resource_components = array("","getAllChores");
 
 
 /*if (count($resource_components) < 2) {
@@ -98,11 +98,14 @@ if($resource_type == 'performChore') {
     $newCompleted->setRid($completedRid);
     //$datetime = new DateTime::createFromFormat('Y-m-d', $resource_components[4]);
 }
-if($resource_type == 'performChore') {
-    $chore = $entityManager->getRepository('Chore')->findOneBy(array('cid' => $resource_components[2]));
-    $chore->setName($resource_components[3]);
-    $chore->setRefreshRate($resource_components[4]);
-    $chore->setLastCompleted($resource_components[5]);
+if($resource_type == 'getAllChores') {
+    $chores = $entityManager->getRepository('Chore')->findAll();
+    $choreArray;
+    foreach ($chores as $chore) {
+        $choreArray[] = json_encode($chore);
+    }
+    header('Content-type: application/json');
+    print(json_encode($choreArray));
 } 
 /*if (count($resource_components) == 2) {
   $mlist = array();

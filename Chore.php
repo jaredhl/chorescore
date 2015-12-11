@@ -1,7 +1,7 @@
 <?php
 /** @Entity @Table(name="Chores")
  */
-class Chore {
+class Chore implements JsonSerializable {
     /** @Id @Column(type="integer") 
      *  @GeneratedValue
      */
@@ -41,6 +41,15 @@ class Chore {
     }
     public function setLastCompleted($lastCompleted) {
         $this->lastCompleted = $lastCompleted;
+    }
+    public function jsonSerialize() {
+        return array(
+            'cid' => $this->cid,
+            'name' => $this->name,
+            'baseValue' => $this->baseValue,
+            'refreshRate' => $this->refreshRate,
+            'lastCompleted' => $this->lastCompleted
+        );
     }
 }
 
