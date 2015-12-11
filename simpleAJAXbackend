@@ -1,0 +1,20 @@
+<?php
+$score = 5;
+$name = 'Berk Erswerler';
+
+if ($_SERVER['REQUEST_METHOD'] == "GET") {
+	$target = $_GET['target'];
+	if ($target == 'name') print(json_encode($name));
+	else if ($target == 'score') print(json_encode($score));
+	else{
+		
+	 	header("HTTP/1.0 400 Bad Request");
+		print(json_encode('Unknown target'));
+	}
+}
+else{
+	header("HTTP/1.0 400 Bad Request");
+	print("Did not understand URL");
+}
+
+?>
