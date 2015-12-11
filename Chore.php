@@ -2,7 +2,7 @@
 /** @Entity @Table(name="chores")
  */
 class Chore {
-    /** @ID @Column(type="integer") 
+    /** @Id @Column(type="integer") 
      *  @GeneratedValue
      */
     private $cid;

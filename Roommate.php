@@ -2,7 +2,7 @@
 /** @Entity @Table(name="roommates")
  */
 class Roommate {
-    /** @ID @Column(type="integer") 
+    /** @Id @Column(type="integer") 
      *  @GeneratedValue
      */
     private $rid;

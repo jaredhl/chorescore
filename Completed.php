@@ -2,7 +2,11 @@
 /** @Entity @Table(name="completed")
  */
 class Completed {
-    /** @ID @Column(type="integer") */
+    /** @Id @Column(type="integer")
+    * @GeneratedValue
+    */
+    private $completedID
+    /** @Column(type="integer") */
     private $cid;
     /** @Column(type="integer") */
     private $rid;
